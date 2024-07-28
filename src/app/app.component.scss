@@ -1,0 +1,15 @@
+/* No CSS do seu componente */
+::ng-deep .success-snackbar {
+  background-color: #4caf50 !important; /* Verde para sucesso */
+  color: #ffffff !important; /* Cor do texto */
+}
+
+::ng-deep .error-snackbar {
+  background-color: #f44336 !important; /* Vermelho para erro */
+  color: #ffffff !important; /* Cor do texto */
+}
+
+::ng-deep .warning-snackbar {
+  background-color: #ff9800 !important; /* Laranja para aviso */
+  color: #ffffff !important; /* Cor do texto */
+}

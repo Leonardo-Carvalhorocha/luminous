@@ -1,0 +1,21 @@
+@if(user) {
+  <mat-toolbar color="primary" >
+    <button mat-fab extended>
+      <mat-icon>apartment</mat-icon>
+      Luminous
+    </button>
+
+    <span>
+      <button mat-fab extended>
+        <mat-icon>person</mat-icon>
+        {{ user.user_nicename }}
+      </button>
+      <button mat-raised-button color="warn" (click)="sair()">sair</button>
+    </span>
+  </mat-toolbar>
+} @else if(isLoading) {
+  <mat-toolbar color="primary" >
+    <mat-spinner diameter="40"></mat-spinner>
+  </mat-toolbar>
+}
+

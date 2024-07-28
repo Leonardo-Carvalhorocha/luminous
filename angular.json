@@ -28,10 +28,12 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "assets"
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -55,7 +57,13 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "./src/app/environment/environment.ts",
+                  "with": "./src/app/environment/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -92,10 +100,12 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "assets"
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -103,5 +113,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "d9fc8ba4-50ed-4919-acb3-7149af12f574"
   }
 }

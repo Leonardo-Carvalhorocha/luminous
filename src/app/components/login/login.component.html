@@ -1,0 +1,57 @@
+<header></header>
+
+<div class="container-login">
+  <div>
+    <img [src]="logoUrl" alt="logo">
+  </div>
+
+  <div class="form-login">
+    <form [formGroup]="form">
+
+      <div class="form">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              formControlName="username"
+            />
+            @if(this.form.controls['username'].errors?.['error']) {
+              <mat-error>
+                {{ this.form.controls['username'].errors?.['error'] }}
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              formControlName="password"
+            />
+            @if(form.controls['password'].errors?.['error']) {
+              <mat-error>
+                {{ form.controls['password'].errors?.['error'] }}
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <button (click)="login()" mat-raised-button>
+          @if(!isLoading) {
+            Entrar
+          } @else {
+            <mat-spinner diameter="40"></mat-spinner>
+          }
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+
+
