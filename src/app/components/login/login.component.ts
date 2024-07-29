@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +18,7 @@ import { HeaderComponent } from '../header/header.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -35,9 +35,9 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   logoUrl = 'assets/img/logo.jpeg'
   user!: User;
-  isLoading = false;
+  loadingState = { isLoading: false };
   token: string = '';
-
+  hide = signal(true);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,30 +52,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.auth.getUser()) {
-      this.token = this.auth.getUser().token;
-      console.log(this.token)
+    if(this.auth.getUserLocal()) {
       this.router.navigate(['/home'])
     }
   }
 
   login() {
-    this.isLoading = true;
+    this.loadingState.isLoading = true;
     const username = this.form.controls['username'].value;
     const password = this.form.controls['password'].value;
 
     if(username && password) {
-      this.auth.GET_TOKEN_USER({username: username, password: password}).subscribe(
-        pipe((user: User) => {
-          this.user = user;
-          window.localStorage.setItem("user", JSON.stringify(this.user));
-          if(this.user) {
-            this.router.navigate(["/home"])
-            setTimeout(() => location.reload(), 1)
-            this.isLoading = false;
-          }
-        })
-      )
+      this.auth.GET_TOKEN_USER({username: username, password: password}, this.loadingState).subscribe()
     } else {
       Object.keys(this.form.controls).forEach((key) => {
         const control = this.form.get(key);
@@ -83,8 +71,13 @@ export class LoginComponent implements OnInit {
         this.utilService.handleMsgError(messageError);
         console.log(messageError);
       })
-      this.isLoading = false;
+      this.loadingState.isLoading = false;
     }
+  }
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 
 }

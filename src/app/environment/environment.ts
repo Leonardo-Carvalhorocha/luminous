@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  token: 'https://dogsapi.origamid.dev/json/jwt-auth/v1/token'
+  token: 'http://luminous.test/json/jwt-auth/v1/token'
 };

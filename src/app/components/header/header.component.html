@@ -1,6 +1,6 @@
 @if(user) {
-  <mat-toolbar color="primary" >
-    <button mat-fab extended>
+<mat-toolbar color="primary">
+    <button mat-fab extended [routerLink]="['/home']" >
       <mat-icon>apartment</mat-icon>
       Luminous
     </button>
@@ -10,12 +10,15 @@
         <mat-icon>person</mat-icon>
         {{ user.user_nicename }}
       </button>
-      <button mat-raised-button color="warn" (click)="sair()">sair</button>
+      <button mat-raised-button color="warn" (click)="sair()">
+        <mat-icon>
+          <span class="material-symbols-outlined">
+          logout
+          </span>
+        </mat-icon>
+        Sair
+      </button>
     </span>
-  </mat-toolbar>
-} @else if(isLoading) {
-  <mat-toolbar color="primary" >
-    <mat-spinner diameter="40"></mat-spinner>
   </mat-toolbar>
 }
 

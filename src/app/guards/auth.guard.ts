@@ -31,7 +31,7 @@ export class AuthGuard {
     //   });
     // }
 
-    if(this.authService.getUser().token) return true;
+    if(this.authService.usuarioAutenticado()) return true;
     this.router.navigate(['/login']);
     return false
   }
